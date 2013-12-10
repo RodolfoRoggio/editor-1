@@ -1,0 +1,1 @@
+![](https://raw.github.com/max107/editor/master/assets/screenshot/screenshot_v1.png)
