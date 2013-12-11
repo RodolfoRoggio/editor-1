@@ -5,7 +5,7 @@ Calculates list of QTextEdit.ExtraSelection
 import time
 
 from PySide.QtCore import Qt
-from PySide.QtGui import QTextCursor, QTextEdit
+from PySide.QtGui import QTextCursor, QTextEdit, QColor
 
 
 class BracketHighlighter:
@@ -92,9 +92,9 @@ class BracketHighlighter:
         selection = QTextEdit.ExtraSelection()
 
         if matched:
-            bgColor = Qt.green
+            bgColor = QColor('#9ED1FF')
         else:
-            bgColor = Qt.red
+            bgColor = QColor('#FFDFDF')
         
         selection.format.setBackground(bgColor)
         selection.cursor = QTextCursor(block)

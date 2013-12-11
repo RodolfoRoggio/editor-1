@@ -50,7 +50,7 @@ class HTMLDelegate(QStyledItemDelegate):
         #  bad long (multiline) strings processing doc.setTextWidth(options.rect.width())
 
         options.text = ""
-        style.drawControl(QStyle.CE_ItemViewItem, options, painter);
+        style.drawControl(QStyle.CE_ItemViewItem, options, painter)
 
         ctx = QAbstractTextDocumentLayout.PaintContext()
 

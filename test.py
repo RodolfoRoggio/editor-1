@@ -1,13 +1,14 @@
 import sys
-from PySide import QtGui, QtCore
-from qutepart import Qutepart
 
+#from PyQt4 import QtGui
+from PySide import QtGui
 
-def main():
-    app = QtGui.QApplication(sys.argv)
-    qute = Qutepart()
-    qute.show()
-    app.exec_()
+app = QtGui.QApplication(sys.argv)
 
-if __name__ == '__main__':
-    main()
+file_browser = QtGui.QTreeView()
+file_model = QtGui.QFileSystemModel()
+file_model.setRootPath("/")
+file_browser.setModel(file_model)
+file_browser.show()
+
+sys.exit(app.exec_())

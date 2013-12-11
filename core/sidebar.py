@@ -3,39 +3,6 @@
 from PySide import QtCore, QtGui
 
 
-class MyData():
-    def __init__(self, txt, parent=None):
-        self.txt = txt
-        self.parent = parent
-        self.child = []
-        self.icon = None
-        self.index = None
-
-    def position(self):
-        position = 0
-        if self.parent is not None:
-            count = 0
-            children = self.parent.child
-            for child in children:
-                if child == self:
-                    position = count
-                    break
-                count += 1
-        return position
-
-    @staticmethod
-    def init():
-        root = MyData("root")
-        for i in range(0, 2):
-            child1 = MyData("child %i" % (i), root)
-            root.child.append(child1)
-            for x in range(0, 2):
-                child2 = MyData("child %i %i" % (i, x), child1)
-                child1.child.append(child2)
-
-        return root
-
-
 class TreeModel(QtCore.QAbstractItemModel):
     def __init__(self, tree):
         super(TreeModel, self).__init__()
@@ -114,9 +81,16 @@ class TreeModel(QtCore.QAbstractItemModel):
 class SidebarTreeView(QtGui.QTreeView):
     def __init__(self, parent=None):
         super(SidebarTreeView, self).__init__(parent)
-
-        data = MyData.init()
-        model = TreeModel(data)
-        self.setModel(model)
-        self.setCurrentIndex(model.index(0, 0))
         self.header().close()
+
+    def open_directory(self, path):
+        file_model = QtGui.QFileSystemModel()
+        file_model.setRootPath(path)
+        self.setModel(file_model)
+
+        self.setRootIndex(file_model.index(path))
+        self.setCurrentIndex(file_model.index(0, 0))
+
+        self.hideColumn(1) # for removing Size Column
+        self.hideColumn(2) # for removing Type Column
+        self.hideColumn(3) # for removing Date Modified Column

@@ -1,7 +1,7 @@
 # coding=utf-8
 
 from PySide import QtGui
-from core.highlighter import Highlighter
+from PySide.QtCore import Qt
 from qutepart import Qutepart
 
 
@@ -21,11 +21,12 @@ class EditorTab(QtGui.QWidget):
     def setupEditor(self):
         font = QtGui.QFont()
         font.setFamily('Monaco')
-        font.setFixedPitch(True)
+        # font.setFixedPitch(True)
         font.setPointSize(12)
 
         self.editor = Qutepart()
-        # self.editor.setFont(font)
+        self.editor.setFont(font)
         self.editor.adjustSize()
+        self.editor.setLineWrapMode(QtGui.QPlainTextEdit.NoWrap)
 
         # self.highlighter = Highlighter(self.editor.document())
